@@ -3,11 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		499D3690264E1E7C004E307F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D368F264E1E7C004E307F /* main.swift */; };
+		499D3698264E1F68004E307F /* TermKit in Frameworks */ = {isa = PBXBuildFile; productRef = 499D3697264E1F68004E307F /* TermKit */; };
+		499D369B264E2102004E307F /* SwiftLSPClient in Frameworks */ = {isa = PBXBuildFile; productRef = 499D369A264E2102004E307F /* SwiftLSPClient */; };
+		499D369D264E211D004E307F /* FileWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D369C264E211D004E307F /* FileWindow.swift */; };
+		499D369F264E22C0004E307F /* Project.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D369E264E22C0004E307F /* Project.swift */; };
+		499D36A2264EFF47004E307F /* SourceEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 499D36A1264EFF47004E307F /* SourceEditor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +30,10 @@
 /* Begin PBXFileReference section */
 		499D368C264E1E7C004E307F /* TurboSwift */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TurboSwift; sourceTree = BUILT_PRODUCTS_DIR; };
 		499D368F264E1E7C004E307F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		499D369C264E211D004E307F /* FileWindow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWindow.swift; sourceTree = "<group>"; };
+		499D369E264E22C0004E307F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
+		499D36A0264EFF1E004E307F /* TermKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TermKit; path = ../TermKit; sourceTree = "<group>"; };
+		499D36A1264EFF47004E307F /* SourceEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +41,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499D3698264E1F68004E307F /* TermKit in Frameworks */,
+				499D369B264E2102004E307F /* SwiftLSPClient in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,6 +52,7 @@
 		499D3683264E1E7C004E307F = {
 			isa = PBXGroup;
 			children = (
+				499D36A0264EFF1E004E307F /* TermKit */,
 				499D368E264E1E7C004E307F /* TurboSwift */,
 				499D368D264E1E7C004E307F /* Products */,
 			);
@@ -58,6 +70,9 @@
 			isa = PBXGroup;
 			children = (
 				499D368F264E1E7C004E307F /* main.swift */,
+				499D369C264E211D004E307F /* FileWindow.swift */,
+				499D369E264E22C0004E307F /* Project.swift */,
+				499D36A1264EFF47004E307F /* SourceEditor.swift */,
 			);
 			path = TurboSwift;
 			sourceTree = "<group>";
@@ -78,6 +93,10 @@
 			dependencies = (
 			);
 			name = TurboSwift;
+			packageProductDependencies = (
+				499D3697264E1F68004E307F /* TermKit */,
+				499D369A264E2102004E307F /* SwiftLSPClient */,
+			);
 			productName = TurboSwift;
 			productReference = 499D368C264E1E7C004E307F /* TurboSwift */;
 			productType = "com.apple.product-type.tool";
@@ -105,6 +124,10 @@
 				Base,
 			);
 			mainGroup = 499D3683264E1E7C004E307F;
+			packageReferences = (
+				499D3696264E1F68004E307F /* XCRemoteSwiftPackageReference "TermKit" */,
+				499D3699264E2102004E307F /* XCRemoteSwiftPackageReference "SwiftLSPClient" */,
+			);
 			productRefGroup = 499D368D264E1E7C004E307F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,6 +143,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				499D3690264E1E7C004E307F /* main.swift in Sources */,
+				499D36A2264EFF47004E307F /* SourceEditor.swift in Sources */,
+				499D369D264E211D004E307F /* FileWindow.swift in Sources */,
+				499D369F264E22C0004E307F /* Project.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -281,6 +307,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		499D3696264E1F68004E307F /* XCRemoteSwiftPackageReference "TermKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/migueldeicaza/TermKit.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		499D3699264E2102004E307F /* XCRemoteSwiftPackageReference "SwiftLSPClient" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chimehq/SwiftLSPClient";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.8.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		499D3697264E1F68004E307F /* TermKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 499D3696264E1F68004E307F /* XCRemoteSwiftPackageReference "TermKit" */;
+			productName = TermKit;
+		};
+		499D369A264E2102004E307F /* SwiftLSPClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 499D3699264E2102004E307F /* XCRemoteSwiftPackageReference "SwiftLSPClient" */;
+			productName = SwiftLSPClient;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 499D3684264E1E7C004E307F /* Project object */;
 }
