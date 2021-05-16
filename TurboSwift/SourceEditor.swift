@@ -108,18 +108,28 @@ class SwiftSourceEditor: SourceEditor {
             }
         }
     }
+    
+    // This is useful to track completion at every point and debug things
+    var completionAtEveryPoint = false
+    
     open override func processKey(event: KeyEvent) -> Bool {
-        if let completing = completions {
-            switch event.key {
-            case .controlJ:
-                insert (text: completionData!.data[completing.selectedItem].label)
-                removeCompletionWindow()
-            default:
-                return completing.processKey(event: event)
-                
+        if !completionAtEveryPoint {
+            if let completing = completions {
+                switch event.key {
+                case .controlJ:
+                    
+                    
+                    let change = completionData!.data[completing.selectedItem]
+                    
+                    // TODO: instead of inserting the text, perform a text replacement operation based on .textEdit property
+                    insert (text: change.label)
+                    removeCompletionWindow()
+                default:
+                    return completing.processKey(event: event)
+                    
+                }
+                return false
             }
-            return false
-        }
         
         let handled = super.processKey(event: event)
         
@@ -131,7 +141,9 @@ class SwiftSourceEditor: SourceEditor {
             complete (triggerChar: nil)
 
         default:
-            break
+            if completionAtEveryPoint {
+                complete (triggerChar: nil)
+            }
         }
         return handled
     }
