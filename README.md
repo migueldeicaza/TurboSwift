@@ -12,3 +12,5 @@ so you might need to both edit the paths, and also, make sure to activate
 those two menu options in order.
 
 Anything else is not really working
+
+<img width="2138" alt="image" src="https://user-images.githubusercontent.com/36863/118426246-e056c800-b698-11eb-8ce8-5a909d7e0501.png">
