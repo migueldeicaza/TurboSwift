@@ -34,6 +34,7 @@
 		499D369E264E22C0004E307F /* Project.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Project.swift; sourceTree = "<group>"; };
 		499D36A0264EFF1E004E307F /* TermKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TermKit; path = ../TermKit; sourceTree = "<group>"; };
 		499D36A1264EFF47004E307F /* SourceEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditor.swift; sourceTree = "<group>"; };
+		499D36A326520488004E307F /* TextBufferKit */ = {isa = PBXFileReference; lastKnownFileType = folder; name = TextBufferKit; path = ../TextBufferKit; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +53,7 @@
 		499D3683264E1E7C004E307F = {
 			isa = PBXGroup;
 			children = (
+				499D36A326520488004E307F /* TextBufferKit */,
 				499D36A0264EFF1E004E307F /* TermKit */,
 				499D368E264E1E7C004E307F /* TurboSwift */,
 				499D368D264E1E7C004E307F /* Products */,

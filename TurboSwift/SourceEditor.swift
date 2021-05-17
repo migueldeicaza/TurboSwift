@@ -8,6 +8,7 @@
 import Foundation
 import TermKit
 import SwiftLSPClient
+import TextBufferKit
 
 class SourceEditor: TextView {
     var project: Project
@@ -23,7 +24,7 @@ class SourceEditor: TextView {
         self.docId = TextDocumentIdentifier (path: file)
 
         super.init ()
-        textEdit = textEdited
+        textEditNotification = textEdited
     }
     
     func textEdited (_ range: TextRange, _ txt: String) {
@@ -96,7 +97,6 @@ class SwiftSourceEditor: SourceEditor {
         
         let ctx = CompletionContext (triggerKind: triggerChar == nil ? .invoked : .triggerCharacter, triggerCharacter: triggerChar)
         let completion = CompletionParams (textDocument: docId, position: position, context: ctx)
-        
         server.completion(params: completion) { completion in
             switch completion {
             case .failure(let err):
@@ -112,17 +112,27 @@ class SwiftSourceEditor: SourceEditor {
     // This is useful to track completion at every point and debug things
     var completionAtEveryPoint = false
     
+    // converts a language server protocol range into a TextView.TextRange
+    func lspRangeToTextRange (lspRange: LSPRange) -> TextView.TextRange {
+        return TextView.TextRange (start: TextBufferKit.Position (line: lspRange.start.line, column: lspRange.start.character),
+                                   end: TextBufferKit.Position (line: lspRange.end.line, column: lspRange.end.character))
+    }
+    
     open override func processKey(event: KeyEvent) -> Bool {
         if !completionAtEveryPoint {
             if let completing = completions {
                 switch event.key {
                 case .controlJ:
-                    
-                    
                     let change = completionData!.data[completing.selectedItem]
                     
                     // TODO: instead of inserting the text, perform a text replacement operation based on .textEdit property
-                    insert (text: change.label)
+                    if let textEdit = change.textEdit {
+                        let editorRange = lspRangeToTextRange(lspRange: textEdit.range)
+                        applyTextEdit(range: editorRange, text: textEdit.newText)
+                        setCursorPosition (position: advance (position: editorRange.start, count: textEdit.newText.count))
+                    } else {
+                        insert(text: change.label)
+                    }
                     removeCompletionWindow()
                 default:
                     return completing.processKey(event: event)
@@ -130,16 +140,21 @@ class SwiftSourceEditor: SourceEditor {
                 }
                 return false
             }
+        }
         
+        switch event.key {
+        case .controlSpace:
+            complete(triggerChar: nil)
+            return true
+        default:
+            break
+        }
         let handled = super.processKey(event: event)
         
         switch event.key {
         case .letter("."):
             complete (triggerChar: ".")
             
-        case .controlSpace:
-            complete (triggerChar: nil)
-
         default:
             if completionAtEveryPoint {
                 complete (triggerChar: nil)

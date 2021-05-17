@@ -89,12 +89,4 @@ class FileWindow: Window {
         get { textView.isDirty }
         set { textView.isDirty = newValue }
     }
-    
-    func change () {
-        let s = project.server
-        
-        //s?.codeAction(params: <#T##CodeActionParams#>, block: <#T##(LanguageServerResult<CodeActionResponse>) -> Void#>)
-        //let change = DidChangeTextDocumentParams (
-        //project._server.didChangeTextDocument(params: <#T##DidChangeTextDocumentParams#>, block: <#T##(LanguageServerError?) -> Void#>)
-    }
 }

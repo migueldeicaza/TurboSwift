@@ -103,6 +103,14 @@ class SimpleEditor: StandardToplevel {
         }
     }
     
+    func run () {
+        MessageBox.info("Run", message: "This should run")
+    }
+    
+    func test () {
+        MessageBox.info("Run", message: "This should test")
+    }
+    
     func openStdFile () {
         guard let p = project else {
             return
@@ -127,6 +135,10 @@ class SimpleEditor: StandardToplevel {
                 ]),
                 MenuBarItem (title: "_Edit", children: []),
                 MenuBarItem (title: "_Find", children: []),
+                MenuBarItem (title: "_Product", children: [
+                    MenuItem(title: "_Run", help: "F5", action: run, shortcut: Key.f5, style: .plain),
+                    MenuItem(title: "_Test", action: run, style: .plain)
+                ]),
                 MenuBarItem (title: "_Window", children: [])])
         
         addSubview(menu)
